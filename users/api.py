@@ -22,6 +22,10 @@ router = Router()
     summary  = "유저 회원가입"
 )
 def user_signup(request, data: UserSignUpInput):
+    
+    """
+    이메일 필수값/중복/형식 확인
+    """
     email = data.email
     if not email:
         return JsonResponse({'detail': '이메일은 필수 입력값입니다.'}, status=400)
@@ -32,16 +36,20 @@ def user_signup(request, data: UserSignUpInput):
     if User.objects.filter(email=email).exists():
         return JsonResponse({'detail': f'{email}은/는 이미 존재합니다.'}, status=400)
     
+    """
+    패스워드 필수값/형식 확인
+    패스워드 조건: 길이 8~20 자리, 최소 1개 이상의 소문자, 대문자, 숫자, (숫자키)특수문자로 구성
+    """
     password = data.password
     if not password:
         return JsonResponse({'detail': '패스워드는 필수 입력값입니다.'}, status=400)
-    """
-    패스워드 조건: 길이 8~20 자리, 최소 1개 이상의 소문자, 대문자, 숫자, (숫자키)특수문자로 구성
-    """
     password_regex = '^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()])[\w\d!@#$%^&*()]{8,20}$'
     if not re.match(password_regex, password):
         return JsonResponse({'detail': '올바른 비밀번호를 입력하세요.'}, status=400)
     
+    """
+    닉네임 필수값/중복 확인
+    """
     nickname = data.nickname
     if not nickname:
         return JsonResponse({'detail': '닉네임은 필수 입력값입니다.'}, status=400)
