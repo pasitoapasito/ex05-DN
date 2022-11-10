@@ -14,3 +14,13 @@ class UserSignUpOutput(Schema):
     id      : int
     email   : str
     nickname: str
+    
+
+class UserSignInInput(Schema):
+    email   : str
+    password: str
+    
+
+class UserSignInOutput(Schema):
+    access_token : str
+    refresh_token: str
