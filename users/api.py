@@ -81,6 +81,9 @@ def user_signup(request, data: UserSignUpInput):
 )
 def user_signin(request, data: UserSignInInput):
     
+    """
+    이메일/패스워드 필수값 확인
+    """
     email = data.email
     if not email:
         return JsonResponse({'detail': '이메일은 필수 입력값입니다.'}, status=400)
