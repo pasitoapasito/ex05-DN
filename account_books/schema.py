@@ -11,7 +11,7 @@ class AccountBookCreateInput(Schema):
     status: Optional[str] = 'in_use'
 
 
-class AccountBookCreateOutput(Schema):
+class AccountBookOutput(Schema):
     id      : int
     nickname: str
     name    : str
