@@ -1,8 +1,7 @@
-from datetime import date, datetime
-from typing   import Optional
-from decimal  import Decimal
+from typing  import Optional
+from decimal import Decimal
 
-from ninja    import Schema
+from ninja import Schema
 
 
 class AccountBookCreateInput(Schema):
@@ -11,9 +10,14 @@ class AccountBookCreateInput(Schema):
     status: Optional[str] = 'in_use'
 
 
+class AccountBookUpdateInput(Schema):
+    name  : Optional[str] = None
+    budget: Optional[Decimal] = None
+
+
 class AccountBookOutput(Schema):
     id      : int
-    nickname: str
+    nickname: Optional[str] = None
     name    : str
     budget  : Decimal
     status  : str
