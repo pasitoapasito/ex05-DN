@@ -2,13 +2,15 @@ import jwt
 
 from ninja.security  import HttpBearer
 from datetime        import datetime
+from typing          import Union, Any
 
 from config.settings import SECRET_KEY
 from users.models    import User
 
 
 class AuthBearer(HttpBearer):
-    def authenticate(self, request, token):
+    def authenticate(self, request, token: str) -> Union[Any, bool]:
+        
         try:
             """
             JWT 토큰 decode
