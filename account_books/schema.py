@@ -34,6 +34,10 @@ class AccountBookCategoryCreateInput(Schema):
     status: Optional[str] = 'in_use'
 
 
+class AccountBookCategoryUpdateInput(Schema):
+    name: Optional[str] = None
+    
+
 class AccountBookCategoryOutput(Schema):
     id      : int
     nickname: Optional[str] = None
