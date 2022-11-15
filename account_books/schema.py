@@ -27,3 +27,21 @@ class AccountBookOutput(Schema):
         if not obj.user.nickname:
             return None
         return obj.user.nickname
+    
+
+class AccountBookCategoryCreateInput(Schema):
+    name  : str
+    status: Optional[str] = 'in_use'
+
+
+class AccountBookCategoryOutput(Schema):
+    id      : int
+    nickname: Optional[str] = None
+    name    : str
+    status  : str
+    
+    @staticmethod
+    def resolve_nickname(obj):
+        if not obj.user.nickname:
+            return None
+        return obj.user.nickname
