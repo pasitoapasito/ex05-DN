@@ -2,7 +2,7 @@ from ninja import Router
 
 from typing import Optional, List
 
-from django.http      import JsonResponse
+from django.http      import HttpRequest, JsonResponse
 from django.db.models import Q
 
 from core.schema                    import ErrorMessage
@@ -27,13 +27,13 @@ router = Router()
     auth     = AuthBearer()
 )
 def get_list_account_book(
-    request,
-    search: Optional[str] = None,
-    sort  : str = 'up_to_date',
-    status: str = 'deleted',
-    offset: int = 0,
-    limit : int = 10
-    ):
+    request: HttpRequest,
+    search : Optional[str] = None,
+    sort   : str = 'up_to_date',
+    status : str = 'deleted',
+    offset : int = 0,
+    limit  : int = 10
+    ) -> JsonResponse:
 
     """
     JWT 토큰에서 유저정보 추출
@@ -81,7 +81,10 @@ def get_list_account_book(
     response = {200: AccountBookOutput, 400: ErrorMessage},
     auth     = AuthBearer()
 )
-def create_account_book(request, data: AccountBookCreateInput):
+def create_account_book(
+    request: HttpRequest, 
+    data   : AccountBookCreateInput
+    ) -> JsonResponse:
     
     """
     JWT 토큰에서 유저정보 추출
@@ -117,7 +120,11 @@ def create_account_book(request, data: AccountBookCreateInput):
     response = {200: AccountBookOutput, 400: ErrorMessage},
     auth     = AuthBearer()
 )
-def update_account_book(request, data: AccountBookUpdateInput, account_book_id: int):
+def update_account_book(
+    request: HttpRequest, 
+    data   : AccountBookUpdateInput, 
+    account_book_id: int
+    ) -> JsonResponse:
     
     """
     JWT 토큰에서 유저정보 추출
@@ -151,7 +158,10 @@ def update_account_book(request, data: AccountBookUpdateInput, account_book_id: 
     response = {204: None, 400: ErrorMessage},
     auth     = AuthBearer()
 )
-def delete_account_book(request, account_book_id: int):
+def delete_account_book(
+    request: HttpRequest, 
+    account_book_id: int
+    ) -> JsonResponse:
     
     """
     JWT 토큰에서 유저정보 추출
@@ -184,7 +194,10 @@ def delete_account_book(request, account_book_id: int):
     response = {204: None, 400: ErrorMessage},
     auth     = AuthBearer()
 )
-def restore_account_book(request, account_book_id: int):
+def restore_account_book(
+    request: HttpRequest, 
+    account_book_id: int
+    ) -> JsonResponse:
     
     """
     JWT 토큰에서 유저정보 추출
