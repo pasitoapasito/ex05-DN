@@ -78,7 +78,7 @@ def get_list_account_book(
     '',
     tags     = ['2. 가계부'],
     summary  = '가계부 생성',
-    response = {201: AccountBookOutput, 400: ErrorMessage},
+    response = {200: AccountBookOutput, 400: ErrorMessage},
     auth     = AuthBearer()
 )
 def create_account_book(request, data: AccountBookCreateInput):
