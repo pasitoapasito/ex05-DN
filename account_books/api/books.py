@@ -1,8 +1,9 @@
 from ninja import Router
 
+from typing import Optional, List
+
 from django.http      import JsonResponse
 from django.db.models import Q
-from typing           import Optional, List
 
 from core.schema                    import ErrorMessage
 from core.utils.auth                import AuthBearer
