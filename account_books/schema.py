@@ -65,8 +65,8 @@ class AccountBookLogUpdateInput(Schema):
     types: Optional[str] = None
     price: Optional[Decimal] = None
     description: Optional[str] = None    
-    category_id: int
     book_id    : int
+    category_id: int
 
 
 class AccountBookLogCreateUpdateOutput(Schema):
