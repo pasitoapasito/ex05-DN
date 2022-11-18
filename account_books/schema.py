@@ -54,21 +54,30 @@ class AccountBookCategoryOutput(Schema):
 class AccountBookLogCreateInput(Schema):
     title: str
     types: str
-    price: int
+    price: Decimal
     description: str
-    cateogry_id: int
+    category_id: int
     book_id    : int
     
-    
-class AccountBookLogCreateOutput(Schema):
+
+class AccountBookLogUpdateInput(Schema):
+    title: Optional[str] = None
+    types: Optional[str] = None
+    price: Optional[Decimal] = None
+    description: Optional[str] = None    
+    category_id: int
+    book_id    : int
+
+
+class AccountBookLogCreateUpdateOutput(Schema):
     id   : int
     title: str
     types: str
-    price: int
+    price: Decimal
     description: str
     status     : str
     book       : str
-    category   : str
+    category   : Optional[str] = None
     created_at : str
     updated_at : str
     
@@ -91,17 +100,17 @@ class AccountBookLogCreateOutput(Schema):
     @staticmethod
     def resolve_updated_at(obj):
         return (obj.updated_at).strftime('%Y-%m-%d %H:%M')
-    
-    
+
+
 class AccountBookLogOutput(Schema):
     id   : int
     title: str
     types: str
-    price: int
+    price: Decimal
     description: str
     status     : str
     book       : str
-    category   : str
+    category   : Optional[str] = None
     created_at : str
     updated_at : str
     
@@ -128,7 +137,7 @@ class AccountBookLogOutput(Schema):
     
 class AccountBookLogListOutput(Schema):
     nickname         : str
-    expected_budget  : int
-    total_income     : Optional[int] = None
-    total_expenditure: Optional[int] = None
+    expected_budget  : Decimal
+    total_income     : Optional[Decimal] = None
+    total_expenditure: Optional[Decimal] = None
     logs: Optional[List[AccountBookLogOutput]] = None
